@@ -33,7 +33,7 @@ class Inventory extends CoreModel
     'deleted' => []
   ];
   public array $translatedAttributes = ['title'];
-  protected $fillable = [];
+  protected $fillable = ['id'];
 
   public function items()
   {
