@@ -14,6 +14,8 @@ return new class extends Migration {
     Schema::create('iinventory__inventories', function (Blueprint $table) {
       $table->engine = 'InnoDB';
       $table->increments('id');
+      $table->string('title')->nullable();
+      $table->integer('quantity')->unsigned()->default(0);
       // Your fields...
       // Audit fields
       $table->timestamps();

@@ -2,13 +2,10 @@
 
 namespace Modules\Iinventory\Models;
 
-use Astrotomic\Translatable\Translatable;
 use Imagina\Icore\Models\CoreModel;
 
 class Inventory extends CoreModel
 {
-  use Translatable;
-
   protected $table = 'iinventory__inventories';
   public string $transformer = 'Modules\Iinventory\Transformers\InventoryTransformer';
   public string $repository = 'Modules\Iinventory\Repositories\InventoryRepository';
@@ -32,8 +29,8 @@ class Inventory extends CoreModel
     'deleting' => [],
     'deleted' => []
   ];
-  public array $translatedAttributes = ['title'];
-  protected $fillable = ['id'];
+
+  protected $fillable = ['id','title', 'quantity'];
 
   public function items()
   {

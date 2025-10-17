@@ -27,7 +27,7 @@ Route::prefix('/iinventory/v1')->group(function () {
     ]);
     Route::apiCrud([
       'module' => 'iinventory',
-      'prefix' => 'inventoryitems',
+      'prefix' => 'inventory-items',
       'controller' => InventoryItemApiController::class,
       'permission' => 'iinventory.inventoryitems',
       //'middleware' => ['create' => [], 'index' => [], 'show' => [], 'update' => [], 'delete' => [], 'restore' => []],

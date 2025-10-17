@@ -2,7 +2,9 @@
 
 namespace Modules\Iinventory\Models;
 
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Imagina\Icore\Models\CoreModel;
+use Modules\Ishoe\Models\Shoe;
 
 class InventoryItem extends CoreModel
 {
@@ -11,9 +13,9 @@ class InventoryItem extends CoreModel
   public string $transformer = 'Modules\Iinventory\Transformers\InventoryItemTransformer';
   public string $repository = 'Modules\Iinventory\Repositories\InventoryItemRepository';
   public array $requestValidation = [
-      'create' => 'Modules\Iinventory\Http\Requests\CreateInventoryItemRequest',
-      'update' => 'Modules\Iinventory\Http\Requests\UpdateInventoryItemRequest',
-    ];
+    'create' => 'Modules\Iinventory\Http\Requests\CreateInventoryItemRequest',
+    'update' => 'Modules\Iinventory\Http\Requests\UpdateInventoryItemRequest',
+  ];
   public array $modelRelations = [
     //eg. 'relationName' => 'belongsToMany/hasMany',
   ];
@@ -29,16 +31,24 @@ class InventoryItem extends CoreModel
   ];
   protected $fillable = [
     'inventory_id',
-    'entity_id',
-    'entity_type',
+    'shoe_id',
+    'options',
     'quantity',
+    'sizes'
   ];
 
-  public function inventory(){
+  protected $casts = [
+    'options' => 'array',
+    'sizes' => 'array'
+  ];
+
+  public function inventory(): BelongsTo
+  {
     return $this->belongsTo(Inventory::class, 'inventory_id');
   }
 
-  public function entity(){
-    return $this->morphTo(__FUNCTION__, 'entity_type', 'entity_id');
+  public function shoe(): BelongsTo
+  {
+    return $this->belongsTo(Shoe::class);
   }
 }
